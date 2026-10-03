@@ -1,1 +1,464 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        //prof, ao longo da atividade, fiquei um pouco confuso e sinto que os agoritmos 5 ao 11 ficaram um pouco errados, porfavor me peerdoe
+        Algoritmo1();
+        Algoritmo2();
+        Algoritmo3();
+        Algoritmo4();
+        Algoritmo5();
+        Algoritmo6();
+        Algoritmo7();
+        Algoritmo8();
+        Algoritmo9();
+        Algoritmo10();
+        Algoritmo11();
+    }
+    private static void Algoritmo1() {
+        Scanner scanner = new Scanner(System.in);
+        int opcao;
+        do {
+            System.out.println("\n=== CALCULADORA SIMPLES ===");
+            System.out.println("1 - Soma");
+            System.out.println("2 - Subtração");
+            System.out.println("3 - Multiplicação");
+            System.out.println("4 - Quociente inteiro da divisão");
+            System.out.println("0 - Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+
+            if (opcao >= 1 && opcao <= 4) {
+                System.out.print("Digite o primeiro número inteiro: ");
+                int numeroUm = scanner.nextInt();
+
+                System.out.print("Digite o segundo número inteiro: ");
+                int numeroDois = scanner.nextInt();
+
+                switch (opcao) {
+                    case 1:
+                        int soma = numeroUm + numeroDois;
+                        System.out.println("Resultado da Soma: " + soma);
+                        break;
+                    case 2:
+                        int subtracao = numeroUm - numeroDois;
+                        System.out.println("Resultado da Subtração: " + subtracao);
+                        break;
+                    case 3:
+                        int multiplicacao = numeroUm * numeroDois;
+                        System.out.println("Resultado da Multiplicação: " + multiplicacao);
+                        break;
+                    case 4:
+                        if (numeroDois != 0) {
+                            int divisao = numeroUm / numeroDois;
+                            System.out.println("Resultado do Quociente Inteiro: " + divisao);
+                        } else {
+                            System.out.println("Erro: Não é possível dividir por zero!");
+                        }
+                        break;
+                }
+            } else if (opcao != 0) {
+                System.out.println("Opção inválida! Tente novamente.");
+            }
+
+        } while (opcao != 0);
+
+        System.out.println("Programa encerrado com sucesso.");
+        scanner.close();
+    }
+
+    private static void Algoritmo2() {
+        //LEMBRETE: Para ser ímpar, o resto da divisão por 2 é diferente de 0
+        //Para ser múltiplo de 3, a soma dos algarismos deve ser divisível por 3
+        int soma = 0;
+        int quantidade = 0;
+
+        for (int i = 1; i <= 500; i++) {
+            if (i % 2 != 0 && i % 3 == 0) {
+                soma += i;
+                quantidade++;
+            }
+        }
+
+        System.out.println("=== RESULTADO ===");
+        System.out.println("Quantidade de números encontrados: " + quantidade);
+        System.out.println("A soma dos números ímpares múltiplos de 3 (de 1 a 500) é: " + soma);
+    }
+
+        private static void Algoritmo3() {
+        Scanner scanner = new Scanner(System.in);
+
+        int MaisAntigo = 0, maiorMeses = Integer.MIN_VALUE;
+        int MaisNovo = 0, menorMeses = Integer.MAX_VALUE;
+
+        int contador = 0;
+        final int limite_funcio = 300;
+
+        System.out.println("Digite o número do empregado e o número de meses de trabalho.");
+        System.out.println("Para encerrar, digite 0 para o número e 0 para os meses.\n");
+
+        while (contador < limite_funcio) {
+            System.out.print("Número do empregado: ");
+            int numeroEmpregado = scanner.nextInt();
+
+            System.out.print("Meses de trabalho: ");
+            int meses = scanner.nextInt();
+
+            if (numeroEmpregado == 0 && meses == 0) {
+                break;
+            }
+
+            if (meses > maiorMeses) {
+                maiorMeses = meses;
+                MaisAntigo = numeroEmpregado;
+            }
+
+            if (meses < menorMeses) {
+                menorMeses = meses;
+                MaisNovo = numeroEmpregado;
+            }
+
+            contador++;
+        }
+
+        System.out.println("\nRESULTADO DA ANÁLISE");
+        if (contador > 0) {
+            System.out.println("Total de empregados analisados: " + contador);
+            System.out.println("Empregado MAIS ANTIGO: Nº " + MaisAntigo + " (" + maiorMeses + " meses de trabalho)");
+            System.out.println("Empregado MAIS RECENTE: Nº " + MaisNovo + " (" + menorMeses + " meses de trabalho)");
+        } else {
+            System.out.println("Nenhum empregado foi cadastrado.");
+            scanner.close();
+        }
+    }
+    private static void Algoritmo4() {
+        Scanner scanner = new Scanner(System.in);
+
+        final int totalPessoas = 15;
+
+        double menorAltura = Double.MAX_VALUE;
+        double maiorAltura = Double.MIN_VALUE;
+        char sexoPessoaMaisAlta = ' ';
+
+        double somaAlturaMulheres = 0;
+        int totalMulheres = 0;
+        int totalHomens = 0;
+
+        for (int i = 1; i <= totalPessoas; i++) {
+            System.out.println("--- Pessoa " + i + " de " + totalPessoas + " ---");
+            System.out.print("Digite a altura (em metros, ex: 1,75): ");
+            double altura = scanner.nextDouble();
+
+            System.out.print("Digite o sexo (M para Masculino, F para Feminino): ");
+            char sexo = scanner.next().toUpperCase().charAt(0);
+
+            if (altura < menorAltura) {
+                menorAltura = altura;
+            }
+            if (altura > maiorAltura) {
+                maiorAltura = altura;
+                sexoPessoaMaisAlta = sexo;
+            }
+            if (sexo == 'F') {
+                somaAlturaMulheres += altura;
+                totalMulheres++;
+            } else if (sexo == 'M') {
+                totalHomens++;
+            } else {
+                System.out.println("Sexo inválido digitado! (Considerando como não computado)");
+            }
+            System.out.println();
+        }
+
+        System.out.println("RESULTADO DA ANÁLISE");
+        System.out.printf("a) Menor altura do grupo: " + menorAltura);
+
+        if (totalMulheres > 0) {
+            double mediaAlturaMulheres = somaAlturaMulheres / totalMulheres;
+            System.out.printf("a) Média de altura das mulheres: " + mediaAlturaMulheres);
+        } else {
+            System.out.println("b) Média de altura das mulheres: Nenhuma mulher foi cadastrada.");
+        }
+
+        System.out.println("c) Número de homens: " + totalHomens);
+        System.out.println("d) Sexo da pessoa mais alta: " + (sexoPessoaMaisAlta == 'M' ? "Masculino (M)" : "Feminino (F)"));
+
+        scanner.close();
+    }
+    private static void Algoritmo5() {
+        Scanner scanner = new Scanner(System.in);
+
+        double somaSalario = 0;
+        int somaFilhos = 0;
+        int totalHabitantes = 0;
+        double maiorSalario = 0;
+        int qtdSalarioAte250 = 0;
+
+        System.out.print("Digite o salário da pessoa (ou valor negativo para encerrar): ");
+        double salario = scanner.nextDouble();
+
+        while (salario >= 0) {
+            System.out.print("Digite o número de filhos: ");
+            int filhos = scanner.nextInt();
+
+            somaSalario += salario;
+            somaFilhos += filhos;
+            totalHabitantes++;
+
+            if (salario > maiorSalario) {
+                maiorSalario = salario;
+            }
+
+            if (salario <= 250.0) {
+                qtdSalarioAte250++;
+            }
+
+            System.out.print("\nDigite o salário da próxima pessoa (ou valor negativo para encerrar): ");
+            salario = scanner.nextDouble();
+        }
+
+        if (totalHabitantes > 0) {
+            double mediaSalario = somaSalario / totalHabitantes;
+            double mediaFilhos = (double) somaFilhos / totalHabitantes;
+            double percentualAte250 = ((double) qtdSalarioAte250 / totalHabitantes) * 100;
+
+            System.out.println("\nRESULTADO DA PESQUISA ");
+            System.out.printf("a) Média do salário da população: R$ " + mediaSalario);
+            System.out.printf("b) Média do número de filhos: " + mediaFilhos);
+            System.out.printf("c) Maior salário: R$ " + maiorSalario);
+            System.out.printf("d) Percentual de pessoas com salário até R$ 250,00: " + percentualAte250);
+        } else {
+            System.out.println("Nenhum dado válido foi informado.");
+        }
+
+        scanner.close();
+    }
+    private static void Algoritmo6() {
+        Scanner scanner = new Scanner(System.in);
+
+        double soma = 0;
+        int qtdPositivos = 0;
+        int qtdNegativos = 0;
+        int totalValores = 0;
+
+        System.out.print("Digite um valor (ou 0 para encerrar): ");
+        double valor = scanner.nextDouble();
+
+        while (valor != 0) {
+            soma += valor;
+            totalValores++;
+
+            if (valor > 0) {
+                qtdPositivos++;
+            } else {
+                qtdNegativos++;
+            }
+
+            System.out.print("Digite o próximo valor (ou 0 para encerrar): ");
+            valor = scanner.nextDouble();
+        }
+
+        if (totalValores > 0) {
+            double media = soma / totalValores;
+            double percentualPositivos = ((double) qtdPositivos / totalValores) * 100;
+            double percentualNegativos = ((double) qtdNegativos / totalValores) * 100;
+
+            System.out.println("\n=== RESULTADOS ===");
+            System.out.printf("Média aritmética: ", media);
+            System.out.println("Quantidade de valores positivos: " + qtdPositivos);
+            System.out.println("Quantidade de valores negativos: " + qtdNegativos);
+            System.out.printf("Percentual de valores positivos: ", percentualPositivos);
+            System.out.printf("Percentual de valores negativos: ", percentualNegativos);
+        } else {
+            System.out.println("Nenhum número foi inserido.");
+        }
+
+        scanner.close();
+    }
+    private static void Algoritmo7 () {
+                Scanner scanner = new Scanner(System.in);
+
+                final int TOTAL_NUMEROS = 75;
+                int soma = 0;
+
+                for (int i = 1; i <= TOTAL_NUMEROS; i++) {
+                    System.out.print("Digite o " + i + "º número inteiro e positivo: ");
+                    int numero = scanner.nextInt();
+                    soma += numero;
+                }
+
+                double media = (double) soma / TOTAL_NUMEROS;
+
+                System.out.println("\n RESULTADO");
+                System.out.println("Quantidade de números lidos: " + TOTAL_NUMEROS);
+                System.out.printf("Média dos valores: ", media);
+
+                scanner.close();
+            }
+        }
+    }
+    private static void Algoritmo8 (){
+        Scanner scanner = new Scanner(System.in);
+
+        final int TOTAL_AMIGOS = 15;
+
+        String nomeMaior = "", nomeMenor = "";
+        double maiorAltura = Double.MIN_VALUE;
+        double menorAltura = Double.MAX_VALUE;
+
+        double somaAlturaHomens = 0, somaAlturaMulheres = 0, somaAlturaTotal = 0;
+        int qtdHomens = 0, qtdMulheres = 0;
+
+        for (int i = 1; i <= TOTAL_AMIGOS; i++) {
+            System.out.println("--- Amigo " + i + " de " + TOTAL_AMIGOS + " ---");
+            System.out.print("Nome: ");
+            String nome = scanner.next();
+
+            System.out.print("Altura (em metros): ");
+            double altura = scanner.nextDouble();
+
+            System.out.print("Sexo (1 - Masculino, 2 - Feminino): ");
+            int sexo = scanner.nextInt();
+
+            somaAlturaTotal += altura;
+
+            if (altura > maiorAltura) {
+                maiorAltura = altura;
+                nomeMaior = nome;
+            }
+
+            if (altura < menorAltura) {
+                menorAltura = altura;
+                nomeMenor = nome;
+            }
+
+            if (sexo == 1) {
+                somaAlturaHomens += altura;
+                qtdHomens++;
+            } else if (sexo == 2) {
+                somaAlturaMulheres += altura;
+                qtdMulheres++;
+            }
+
+            System.out.println();
+        }
+
+        System.out.println("RESULTADO DA ANÁLISE");
+        System.out.printf("Maior altura: %.2f m (Nome: ", maiorAltura, nomeMaior);
+        System.out.printf("Menor altura: %.2f m (Nome: ", menorAltura, nomeMenor);
+
+        if (qtdHomens > 0) {
+            System.out.printf("Média de altura dos homens: ", somaAlturaHomens / qtdHomens);
+        } else {
+            System.out.println("Nenhum homem cadastrado.");
+        }
+
+        if (qtdMulheres > 0) {
+            System.out.printf("Média de altura das mulheres: ", somaAlturaMulheres / qtdMulheres);
+        } else {
+            System.out.println("Nenhuma mulher cadastrada.");
+        }
+
+        System.out.printf("Média de altura da turma: ", somaAlturaTotal / TOTAL_AMIGOS);
+
+        scanner.close();
+    }
+    private static void Algoritmo9 (){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Digite o número de alunos da turma (N): ");
+        int n = scanner.nextInt();
+
+        double maiorNota = -1; // Menor que a nota mínima possível (0)
+        double menorNota = 16; // Maior que a nota máxima possível (15)
+
+        for (int i = 1; i <= n; i++) {
+            System.out.print("Digite a nota do aluno " + i + " (0 a 15): ");
+            double nota = scanner.nextDouble();
+
+            if (nota > maiorNota) {
+                maiorNota = nota;
+            }
+
+            if (nota < menorNota) {
+                menorNota = nota;
+            }
+        }
+
+        System.out.println("RESULTADO DA TURMA");
+        System.out.println("Maior nota obtida: " + maiorNota);
+        System.out.println("Menor nota obtida: " + menorNota);
+
+        scanner.close();
+    }
+    private static void Algoritmo10 (){
+        System.out.println("=== TABELA DE CONVERSÃO: POLEGADAS PARA CENTÍMETROS ===");
+        System.out.println("Polegadas | Centímetros");
+        System.out.println("-----------------------");
+
+        for (int pol = 1; pol <= 20; pol++) {
+            double cm = pol * 2.54;
+            System.out.printf("11.2f -> cm", pol, cm);
+        }
+    }
+    private static void Algoritmo11 (){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Digite o limite inferior (inteiro e positivo): ");
+        int limiteInferior = scanner.nextInt();
+
+        System.out.print("Digite o limite superior (inteiro e positivo): ");
+        int limiteSuperior = scanner.nextInt();
+
+        int somaPares = 0;
+
+        for (int i = limiteInferior; i <= limiteSuperior; i++) {
+            if (i % 2 == 0) {
+                somaPares += i;
+            }
+        }
+        System.out.println("RESULTADO");
+        System.out.println("A soma de todos os números pares no intervalo [" + limiteInferior + ", " + limiteSuperior + "] é: " + somaPares);
+
+        scanner.close();
+    }
+    private static void Algoritmo12 (){
+        Scanner scanner = new Scanner(System.in);
+
+        final int TOTAL_ALUNOS = 100;
+
+        double maiorNota1 = -1, maiorNota2 = -1;
+        int matriculaMaior1 = 0, matriculaMaior2 = 0;
+
+        for (int i = 1; i <= TOTAL_ALUNOS; i++) {
+            System.out.println(" Aluno " + i + " de " + TOTAL_ALUNOS + "");
+            System.out.print("Número de matrícula: ");
+            int matricula = scanner.nextInt();
+
+            System.out.print("Nota: ");
+            double nota = scanner.nextDouble();
+
+            if (nota > maiorNota1) {
+
+                maiorNota2 = maiorNota1;
+                matriculaMaior2 = matriculaMaior1;
+
+                maiorNota1 = nota;
+                matriculaMaior1 = matricula;
+            }
+            else if (nota > maiorNota2) {
+                maiorNota2 = nota;
+                matriculaMaior2 = matricula;
+            }
+            System.out.println();
+        }
+
+        System.out.println("=== DUAS MAIORES NOTAS ===");
+        System.out.println("1ª Maior Nota: " + maiorNota1 + " (Matrícula: " + matriculaMaior1 + ")");
+        System.out.println("2ª Maior Nota: " + maiorNota2 + " (Matrícula: " + matriculaMaior2 + ")");
+
+        scanner.close();
+    }
+
+
 
